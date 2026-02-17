@@ -1,0 +1,279 @@
+html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+
+#map {
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  left: 360px;
+}
+
+#sidebar {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 360px;
+  overflow: auto;
+  padding: 14px 14px 18px 14px;
+  background: #ffffff;
+  border-right: 1px solid #e6e6e6;
+  /* Smooth transition for color changes */
+  transition: background 0.3s, color 0.3s; 
+}
+
+h2 { margin: 0 0 6px 0; font-size: 18px; }
+.subtitle { margin: 0 0 12px 0; font-size: 13px; color: #444; }
+
+.block { padding: 10px 0; border-top: 1px solid #eee; }
+.block h3 { margin: 0 0 8px 0; font-size: 14px; }
+label { display: block; margin: 6px 0; font-size: 13px; }
+input[type="range"] { width: 100%; }
+
+.row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.hint { margin: 6px 0 0 0; font-size: 12px; color: #666; }
+
+#topList { margin: 8px 0 0 18px; padding: 0; }
+#topList li { margin: 6px 0; font-size: 13px; cursor: pointer; }
+#topList li:hover { text-decoration: underline; }
+
+#resetBtn {
+  border: 1px solid #ddd;
+  background: #f7f7f7;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#resetBtn:hover { background: #efefef; }
+
+#legend .item { display:flex; align-items:center; gap:8px; margin: 6px 0; font-size: 13px; }
+#legend .swatch { width: 12px; height: 12px; border-radius: 50%; border: 1px solid #333; }
+
+.block.small { padding-bottom: 24px; }
+
+/* Header action buttons hover effect */
+.header-actions button {
+  transition: transform 0.2s;
+}
+.header-actions button:hover {
+  transform: scale(1.1);
+}
+
+/* =========================================
+   Dark Mode Styles
+========================================= */
+body.dark-mode #sidebar {
+  background: #1a1a1a;
+  color: #f0f0f0;
+  border-right: 1px solid #333;
+}
+body.dark-mode .subtitle,
+body.dark-mode .hint {
+  color: #aaa;
+}
+body.dark-mode .block {
+  border-top: 1px solid #333;
+}
+body.dark-mode #resetBtn {
+  background: #333;
+  border: 1px solid #555;
+  color: #fff;
+}
+body.dark-mode #resetBtn:hover {
+  background: #444;
+}
+body.dark-mode .modal-content {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+/* =========================================
+   Info Modal Styles
+========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6); 
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+}
+
+.modal-content {
+  background: #fff;
+  padding: 24px 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px; right: 16px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+body.dark-mode .close-btn:hover {
+  color: #fff;
+}
+/* =========================================
+   Popup Redesign (Card Style)
+========================================= */
+/* 1. Remove default padding to allow edge-to-edge banner */
+.mapboxgl-popup-content {
+  padding: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
+  border: none !important;
+}
+
+/* 2. Style the close button over the image */
+.mapboxgl-popup-close-button {
+  background: rgba(0,0,0,0.5) !important;
+  color: white !important;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  top: 8px !important;
+  right: 8px !important;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.mapboxgl-popup-close-button:hover {
+  background: rgba(0,0,0,0.8) !important;
+}
+
+/* 3. Card Layout */
+.custom-popup {
+  width: 260px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.popup-banner {
+  height: 110px;
+  background-size: cover;
+  background-position: center;
+  background-color: #eee;
+}
+
+.popup-body {
+  padding: 16px;
+}
+
+.popup-title {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* 4. Stars and Score */
+.popup-stars {
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+.stars-color {
+  color: #FFB800; /* Gold */
+  letter-spacing: 2px;
+}
+.score-text {
+  color: #777;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+/* 5. Tags/Badges */
+.popup-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.badge-type {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+.badge-feature {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+/* 6. Info List (Address, Hours) */
+.popup-info {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 16px;
+}
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 6px;
+  gap: 6px;
+}
+
+/* 7. Action Buttons */
+.popup-actions {
+  display: flex;
+  gap: 8px;
+}
+.btn {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  padding: 8px 0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+.btn-primary {
+  background: #0ea5e9;
+  color: white;
+  border: 1px solid #0ea5e9;
+}
+.btn-primary:hover {
+  background: #0284c7;
+}
+.btn-outline {
+  background: transparent;
+  color: #0ea5e9;
+  border: 1px solid #0ea5e9;
+}
+.btn-outline:hover {
+  background: #e0f2fe;
+}
+
+/* 8. Dark Mode Support for Popup */
+body.dark-mode .mapboxgl-popup-content {
+  background: #2a2a2a;
+}
+body.dark-mode .popup-title {
+  color: #eee;
+}
+body.dark-mode .score-text,
+body.dark-mode .popup-info {
+  color: #aaa;
+}
+body.dark-mode .badge-feature {
+  background: #444;
+  color: #ccc;
+}

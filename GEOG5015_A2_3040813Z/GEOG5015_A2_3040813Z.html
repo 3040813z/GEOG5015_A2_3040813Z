@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>GEOG5015_Assement2</title>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css'>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.1/mapbox-gl-geocoder.css'><link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div id="sidebar">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2>Glasgow Food & Drinks Finder</h2>
+    <div class="header-actions">
+      <button id="darkModeBtn" title="Toggle Dark Mode" style="cursor:pointer; background:none; border:none; font-size: 20px;">🌙</button>
+      <button id="infoBtn" title="How to use" style="cursor:pointer; background:none; border:none; font-size: 20px;">❓</button>
+    </div>
+  </div>
+  
+  <p class="subtitle">Find nearby, “high-quality” places (proxy score) around you.</p>
+
+  <div class="block">
+    <h3>Type</h3>
+    <label><input type="checkbox" class="typeChk" value="cafe" checked> Cafe</label>
+    <label><input type="checkbox" class="typeChk" value="restaurant" checked> Restaurant</label>
+    <label><input type="checkbox" class="typeChk" value="bar" checked> Bar</label>
+  </div>
+
+  <div class="block">
+    <h3>Proxy rating (0–5)</h3>
+    <div class="row">
+      <span>Min score:</span>
+      <strong id="scoreVal">0</strong>
+    </div>
+    <input id="scoreSlider" type="range" min="0" max="5" step="1" value="0">
+    <p class="hint">Proxy score = data completeness + accessibility tags (not real reviews).</p>
+  </div>
+
+  <div class="block">
+    <h3>Advanced Features</h3>
+    <label><input type="checkbox" id="chkWheelchair"> ♿ Wheelchair Accessible</label>
+    <label><input type="checkbox" id="chkWebsite"> 🌐 Has Website</label>
+    <label><input type="checkbox" id="chkTakeaway"> 🥡 Takeaway Available</label>
+  </div>
+
+  <div class="block">
+    <h3>Walkable distance</h3>
+    <div class="row">
+      <span>Radius (km):</span>
+      <strong id="radiusVal">3.0</strong>
+    </div>
+    <input id="radiusSlider" type="range" min="0.5" max="5" step="0.5" value="3">
+    <p class="hint">Tip: click the 📍 button to locate yourself, then filter by radius.</p>
+  </div>
+
+  <div class="block">
+    <h3>Advanced Features</h3>
+    <label><input type="checkbox" id="chkWheelchair"> ♿ Wheelchair Accessible</label>
+    <label><input type="checkbox" id="chkWebsite"> 🌐 Has Website</label>
+    <label><input type="checkbox" id="chkTakeaway"> 🥡 Takeaway Available</label>
+  </div>
+
+  <div class="block">
+    <h3>Cuisine Keyword</h3>
+    <input type="text" id="cuisineInput" placeholder="e.g. pizza, indian, burger..." style="width: 100%; padding: 6px; box-sizing: border-box; border-radius: 4px; border: 1px solid #ccc;">
+  </div>
+  
+  <div class="block">
+    <div class="row">
+      <h3>Top 10 (score ↓, distance ↑)</h3>
+      <button id="resetBtn">Reset</button>
+    </div>
+    <ol id="topList"></ol>
+  </div>
+
+  <div class="block small">
+    <h3>Legend</h3>
+    <div id="legend"></div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div id="infoModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModalBtn">&times;</span>
+    <h2 style="margin-top: 0;">💡 How to use this map</h2>
+    <p><strong>What is Proxy Score?</strong><br>
+    It's a rating from 0-5 based on data completeness (opening hours, website, wheelchair access, full address, and takeaway/cuisine tags). It highlights high-quality OSM data!</p>
+    <p><strong>How to find nearby places?</strong><br>
+    Click the 📍 (Geolocate) button on the top right of the map to find your location, then use the <strong>Walkable distance</strong> slider to filter places within your preferred radius.</p>
+    <p><strong>Dark Mode</strong><br>
+    Click the 🌙 icon to toggle between Light and Dark map styles.</p>
+  </div>
+</div>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js'></script><script  src="./script.js"></script>
+
+  </body>
+  
+</html>
